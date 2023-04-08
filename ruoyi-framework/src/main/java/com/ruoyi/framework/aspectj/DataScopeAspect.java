@@ -40,9 +40,9 @@ public class DataScopeAspect
      */
     public static final String DATA_SCOPE_DEPT = "3";
 
-    /**
-     * 部门及以下数据权限
-     */
+        /**
+         * 部门及以下数据权限
+         */
     public static final String DATA_SCOPE_DEPT_AND_CHILD = "4";
 
     /**
