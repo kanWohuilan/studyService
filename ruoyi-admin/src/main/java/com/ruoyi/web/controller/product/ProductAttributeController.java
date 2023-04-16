@@ -2,9 +2,11 @@ package com.ruoyi.web.controller.product;
 
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.product.domain.PmsProduct;
-import com.ruoyi.product.service.ProductService;
+import com.ruoyi.product.domain.PmsProductAttribute;
+import com.ruoyi.product.domain.vo.PmsProductCategoryVo;
+import com.ruoyi.product.service.ProductAttributeService;
+import com.ruoyi.product.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,18 +24,15 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/product")
-public class ProductController extends BaseController {
+public class ProductAttributeController extends BaseController {
     @Autowired
-    ProductService productService;
+    ProductAttributeService productAttributeService;
     /**
-     * 获取会员列表
+     * 根据分类获取商品属性列表
      */
-    @GetMapping("/list")
-    public TableDataInfo list(PmsProduct product)
-    {
-        startPage();
-        List<PmsProduct> list = productService.selectProductList(product);
-        return getDataTable(list);
-
+    @GetMapping("/attributelist")
+    public AjaxResult list(Integer categoryId){
+        List<PmsProductAttribute> list = productAttributeService.selectAttributeByCategoryList(categoryId);
+        return AjaxResult.success(list);
     }
 }

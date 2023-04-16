@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.product.mapper.PmsProductMapper">
+<mapper namespace="com.ruoyi.product.mapper.PmsProductBrandMapper">
 
     <!--    <resultMap type="UmsMember" id="PmsProduct" >-->
     <!--        <id     property="id"       column="id"      />-->
@@ -18,26 +18,9 @@
     <!--    </resultMap>-->
 
 
-    <select id="selectProductList" parameterType="PmsProduct" resultType="PmsProduct">
-        select id,name,pic,product_sn,sale,price,description,stock,brand_name,brand_id,product_category_name,publish_status from
-        pms_product
-        <where>
-            <if test="id != null and id != 0">
-                AND id = #{id}
-            </if>
-            <if test="name != null and name != ''">
-                AND name = #{name}
-            </if>
-            <if test="productSn != null and productSn != ''">
-                AND product_sn = #{productSn}
-            </if>
-            <if test="brandId != null and brandId != 0">
-                AND brand_id = #{brandId}
-            </if>
-            <if test="publishStatus != null ">
-                AND publish_status = #{publishStatus}
-            </if>
-        </where>
+    <select id="selectProductBrandList"  resultType="PmsProductBrand">
+        select id,name from
+         pms_brand
     </select>
 
 </mapper>

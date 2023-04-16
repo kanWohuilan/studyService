@@ -12,7 +12,7 @@ import java.util.List;
  * @Author FGQ
  * @Date 2023/3/30 11:37 PM
  * @PackageName:service.impl
- * @ClassName: MemberServiceImpl
+ * @ClassName: ProductServiceImpl
  * @Description: TODO
  * @Version 1.0
  */
