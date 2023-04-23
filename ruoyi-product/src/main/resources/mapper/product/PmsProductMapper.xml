@@ -39,5 +39,22 @@
             </if>
         </where>
     </select>
-
+    <insert id="insertProduct" parameterType="PmsProduct" keyProperty="id" useGeneratedKeys="true">
+      insert into pms_product(
+        <if test="id != null and id != 0">id,</if>
+        <if test="pic != null and pic != ''">pic,</if>
+        <if test="productSn != null and productSn != ''">product_sn,</if>
+        <if test="price != null and price != ''">price,</if>
+        <if test="description != null and description != ''">description,</if>
+        <if test="productCategoryId != null and productCategoryId != ''">product_category_id,</if>
+        <if test="name != null and name != ''">name</if>
+        )values(
+        <if test="id != null and id != 0">#{id},</if>
+        <if test="pic != null and pic != ''">#{pic},</if>
+        <if test="productSn != null and productSn != ''">#{productSn},</if>
+        <if test="price != null and price != ''">#{price},</if>
+        <if test="productCategoryId != null and productCategoryId != ''">#{productCategoryId},</if>
+        <if test="name != null and name != ''">#{name}</if>
+        )
+    </insert>
 </mapper>

@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="batchRoleDept">
 		insert into sys_role_dept(role_id, dept_id) values
-		<foreach item="item" index="index" collection="list" separator=",">
+			<foreach item="item" index="index" collection="list" separator=",">
 			(#{item.roleId},#{item.deptId})
 		</foreach>
 	</insert>

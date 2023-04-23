@@ -4,11 +4,10 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.product.domain.PmsProduct;
+import com.ruoyi.product.domain.dto.CreateProductAndSkuRequest;
 import com.ruoyi.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,6 +33,13 @@ public class ProductController extends BaseController {
         startPage();
         List<PmsProduct> list = productService.selectProductList(product);
         return getDataTable(list);
+
+    }
+    @PostMapping("/addproduct")
+    public AjaxResult addproduct(@RequestBody CreateProductAndSkuRequest productAndSkuRequest)
+    {
+        productService.createProductAndSkuRequest(productAndSkuRequest);
+        return AjaxResult.success();
 
     }
 }

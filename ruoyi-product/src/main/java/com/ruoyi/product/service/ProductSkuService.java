@@ -1,6 +1,7 @@
 package com.ruoyi.product.service;
 
 import com.ruoyi.product.domain.PmsProduct;
+import com.ruoyi.product.domain.PmsSku;
 import com.ruoyi.product.domain.dto.CreateProductAndSkuRequest;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * @Description: TODO
  * @Version 1.0
  */
-public interface ProductService {
-    List<PmsProduct> selectProductList(PmsProduct pmsProduct);
-    int createProductAndSkuRequest(CreateProductAndSkuRequest createProductAndSkuRequest);
+public interface ProductSkuService {
+//    List<PmsProduct> selectProductList(PmsProduct pmsProduct);
+    int insertSku(PmsSku sku);
 }
