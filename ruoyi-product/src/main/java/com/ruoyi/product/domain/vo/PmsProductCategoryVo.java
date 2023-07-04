@@ -23,5 +23,6 @@ public class PmsProductCategoryVo extends BaseEntity {
     @ApiModelProperty(value = "分类名称")
     @JsonProperty("label")
     private String name;
+    private Integer level;
     private List<PmsProductCategoryVo> children;
 }

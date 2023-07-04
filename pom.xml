@@ -198,7 +198,6 @@
         <module>ruoyi-common</module>
         <module>ruoyi-member</module>
         <module>ruoyi-product</module>
-        <module>ruoyi-111</module>
     </modules>
     <packaging>pom</packaging>
 

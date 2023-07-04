@@ -18,72 +18,70 @@
     <!--    </resultMap>-->
 
 
-<!--    <select id="selectProductList" parameterType="PmsProduct" resultType="PmsProduct">-->
-<!--        select id,name,pic,product_sn,sale,price,description,stock,brand_name,brand_id,product_category_name,publish_status from-->
-<!--        pms_product-->
-<!--        <where>-->
-<!--            <if test="id != null and id != 0">-->
-<!--                AND id = #{id}-->
-<!--            </if>-->
-<!--            <if test="name != null and name != ''">-->
-<!--                AND name = #{name}-->
-<!--            </if>-->
-<!--            <if test="productSn != null and productSn != ''">-->
-<!--                AND product_sn = #{productSn}-->
-<!--            </if>-->
-<!--            <if test="brandId != null and brandId != 0">-->
-<!--                AND brand_id = #{brandId}-->
-<!--            </if>-->
-<!--            <if test="publishStatus != null ">-->
-<!--                AND publish_status = #{publishStatus}-->
-<!--            </if>-->
-<!--        </where>-->
-<!--    </select>-->
-    <insert id="insertSku" parameterType="PmsSku">
-      insert into pms_product(
-        <if test="productId != null and productId != 0">name,</if>
-        <if test="skuCode != null and skuCode != ''">sku_code,</if>
-        <if test="price != null and price != 0">price,</if>
-        <if test="stock != null and stock != 0">stock,</if>
-        <if test="pic != null and pic != ''">pic,</if>
-      <if test="verifyStatus != null and verifyStatus != ''">#{verify_status},</if>
-
-      )value (
+    <!--    <select id="selectProductList" parameterType="PmsProduct" resultType="PmsProduct">-->
+    <!--        select id,name,pic,product_sn,sale,price,description,stock,brand_name,brand_id,product_category_name,publish_status from-->
+    <!--        pms_product-->
+    <!--        <where>-->
+    <!--            <if test="id != null and id != 0">-->
+    <!--                AND id = #{id}-->
+    <!--            </if>-->
+    <!--            <if test="name != null and name != ''">-->
+    <!--                AND name = #{name}-->
+    <!--            </if>-->
+    <!--            <if test="productSn != null and productSn != ''">-->
+    <!--                AND product_sn = #{productSn}-->
+    <!--            </if>-->
+    <!--            <if test="brandId != null and brandId != 0">-->
+    <!--                AND brand_id = #{brandId}-->
+    <!--            </if>-->
+    <!--            <if test="publishStatus != null ">-->
+    <!--                AND publish_status = #{publishStatus}-->
+    <!--            </if>-->
+    <!--        </where>-->
+    <!--    </select>-->
+    <insert id="insertSku" parameterType="PmsSku" useGeneratedKeys="true" keyProperty="id">
+        insert into pms_sku_stock(
+        <trim suffixOverrides=",">
+            <if test="productId != null and productId != 0">product_id,</if>
+            <if test="skuCode != null and skuCode != ''">sku_code,</if>
+            <if test="price != null and price != 0">price,</if>
+            <if test="stock != null and stock != 0">stock,</if>
+            <if test="pic != null and pic != ''">pic,</if>
+            <if test="verifyStatus != null">verify_status,</if>
+        </trim>
+        )values (
+        <trim suffixOverrides=",">
         <if test="productId != null and productId != 0">#{productId},</if>
         <if test="skuCode != null and skuCode != ''">#{skuCode},</if>
         <if test="price != null">#{price},</if>
         <if test="stock != null">#{stock},</if>
         <if test="pic != null and pic != ''">#{pic},</if>
-        <if test="remark != null and remark != ''">#{remark},</if>
-      <if test="verifyStatus != null and verifyStatus != ''">#{verifyStatus},</if>
-
-      )
+        <if test="verifyStatus != null ">#{verifyStatus},</if>
+        </trim>
+        )
     </insert>
-  <insert id="batchSku" parameterType="java.util.List">
-    insert into pms_sku_stock (product_id, sku_code, price, stock, pic, verify_status)
-    values
-    <foreach collection="list" item="sku" index="index" separator=",">
-      (
-      #{sku.productId},
-      #{sku.skuCode},
-      #{sku.price},
-      #{sku.stock},
-      #{sku.pic},
-      #{sku.verifyStatus}
-      )
-    </foreach>
-  </insert>
-  <insert id="batchSkuAttribute" parameterType="list">
-    insert into pms_product(
-    <if test="productId != null and productId != 0">product_id,</if>
-    <if test="skuCode != null and skuCode != ''">sku_code,</if>
-    <if test="price != null and price != 0">price,</if>
-    <if test="stock != null and stock != 0">stock,</if>
-    <if test="pic != null and pic != ''">pic,</if>
-    <if test="verifyStatus != null and verifyStatus != ''">verifyStatus,</if>
-    )value
-    <foreach collection="list" item="item" separator=",">
-      (#{item.productId},#{item.skuCode},#{item.price},#{item.stock},#{item.pic},#{item.verifyStatus})
-    </foreach>
-  </insert>
+    <insert id="batchSku" parameterType="java.util.List">
+        insert into pms_sku_stock (product_id, sku_code, price, stock, pic, verify_status)
+        values
+        <foreach collection="list" item="sku" index="index" separator=",">
+            (
+            #{sku.productId},
+            #{sku.skuCode},
+            #{sku.price},
+            #{sku.stock},
+            #{sku.pic},
+            #{sku.verifyStatus}
+            )
+        </foreach>
+    </insert>
+    <insert id="batchSkuAttribute" parameterType="list">
+        insert into pms_sku_attribute_value(
+        sku_id,
+        attribute_id,
+        attribute_value
+        )values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.skuId},#{item.attributeId},#{item.attributeValue})
+        </foreach>
+    </insert>
 </mapper>

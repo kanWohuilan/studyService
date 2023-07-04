@@ -18,9 +18,12 @@
     <!--    </resultMap>-->
 
 
-    <select id="selectProductBrandList"  resultType="PmsProductBrand">
+    <select id="selectAllProductBrandList"  resultType="PmsProductBrand">
         select id,name from
          pms_brand
     </select>
-
+    <select id="selectProductBrandList"  resultType="PmsProductBrand">
+        select id,name from
+            pms_brand
+    </select>
 </mapper>

@@ -21,6 +21,11 @@ public class ProductBrandServicesImpl implements ProductBrandService {
     @Autowired
     PmsProductBrandMapper pmsProductBrandMapper;
     @Override
+    public List<PmsProductBrand> selectAllProductBrandList() {
+        return pmsProductBrandMapper.selectAllProductBrandList();
+    }
+
+    @Override
     public List<PmsProductBrand> selectProductBrandList() {
         return pmsProductBrandMapper.selectProductBrandList();
     }

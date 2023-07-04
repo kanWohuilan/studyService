@@ -28,4 +28,33 @@
             where id = #{categoryId} and parent_id != 0
         </if>
     </select>
+    <update id="updateCategory" parameterType="PmsProductCategory">
+        update pms_product_category
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <insert id="insertCategory">
+        insert into pms_product_category (
+        <if test="level != null ">level,</if>
+        <if test="parentId != null">parent_id,</if>
+        <if test="name != null and name != ''">name</if>
+        )values (
+        <if test="level != null ">#{level},</if>
+        <if test="parentId != null">#{parentId},</if>
+        <if test="name != null and name != ''">#{name}</if>
+        )
+    </insert>
+    <select id="selectByParentCategoryId" resultType="int">
+        select count(*)
+        from pms_product_category
+        where id = #{parentId}
+    </select>
+    <delete id="deleteCategory">
+        delete from pms_product_category where id in
+        <foreach collection="array" item="item" open="(" separator="," close=")">#{item}</foreach>
+    </delete>
 </mapper>

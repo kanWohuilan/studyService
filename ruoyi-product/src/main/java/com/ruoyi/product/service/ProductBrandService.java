@@ -13,5 +13,6 @@ import java.util.List;
  * @Version 1.0
  */
 public interface ProductBrandService {
+   public List<PmsProductBrand> selectAllProductBrandList();
    public List<PmsProductBrand> selectProductBrandList();
 }

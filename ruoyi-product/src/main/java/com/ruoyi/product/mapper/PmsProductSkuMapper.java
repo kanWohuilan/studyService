@@ -2,6 +2,7 @@ package com.ruoyi.product.mapper;
 
 import com.ruoyi.product.domain.PmsProduct;
 import com.ruoyi.product.domain.PmsSku;
+import com.ruoyi.product.domain.PmsSkuAttribute;
 
 import java.util.List;
 
@@ -18,5 +19,6 @@ public interface PmsProductSkuMapper {
 //    public List<PmsProduct> selectProductList(PmsProduct pmsProduct);
     public  int insertSku(PmsSku sku);
     public int batchSku(List<PmsSku> skuList);
+    public int batchSkuAttribute(List<PmsSkuAttribute> skuAttributeList);
 
 }

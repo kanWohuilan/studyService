@@ -14,5 +14,7 @@ import java.util.List;
  * @Version 1.0
  */
 public interface PmsProductBrandMapper {
+    public List<PmsProductBrand> selectAllProductBrandList();
+
     public List<PmsProductBrand> selectProductBrandList();
 }

@@ -2,6 +2,7 @@ package com.ruoyi.web.controller.product;
 
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.product.domain.PmsProduct;
 import com.ruoyi.product.domain.PmsProductBrand;
 import com.ruoyi.product.domain.vo.PmsProductCategoryVo;
@@ -30,9 +31,18 @@ public class ProductBrandController extends BaseController {
     /**
      * 获取所有商品菜单列表
      */
-    @GetMapping("/brandlist")
-    public AjaxResult list(PmsProduct product){
-        List<PmsProductBrand> list = productBrandService.selectProductBrandList();
+    @GetMapping("/brandAlllist")
+    public AjaxResult allList(PmsProduct product){
+        List<PmsProductBrand> list = productBrandService.selectAllProductBrandList();
         return AjaxResult.success(list);
+    }
+    /**
+     * 获取所有商品菜单列表
+     */
+    @GetMapping("/brandlist")
+    public TableDataInfo list(PmsProduct product){
+        startPage();
+        List<PmsProductBrand> list = productBrandService.selectAllProductBrandList();
+        return getDataTable(list);
     }
 }

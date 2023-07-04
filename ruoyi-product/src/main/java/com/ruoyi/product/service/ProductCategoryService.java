@@ -3,6 +3,7 @@ package com.ruoyi.product.service;
 import com.ruoyi.product.domain.PmsProduct;
 import com.ruoyi.product.domain.PmsProductCategory;
 import com.ruoyi.product.domain.vo.PmsProductCategoryVo;
+import com.ruoyi.product.rest.AddCategoryReq;
 
 import java.util.List;
 
@@ -16,4 +17,10 @@ import java.util.List;
  */
 public interface ProductCategoryService {
     List<PmsProductCategoryVo> selectProductCategoryList();
+
+    int updateProductCategory(PmsProductCategory productCategory);
+
+    int insertCategory(AddCategoryReq addCategoryReq);
+
+    int deleteCategory(Long[] ids);
 }

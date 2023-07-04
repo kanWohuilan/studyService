@@ -57,19 +57,21 @@ public class ProductServiceImpl implements ProductService {
                 List<PmsSkuAttribute> skuAttributes = new ArrayList<>();
                 PmsSku pmsSkusku = new PmsSku();
                 BeanUtils.copyProperties(sku, pmsSkusku);
-//                sku.getSkuAttributesList().forEach(skuAttribute -> {
-//                    skuAttributes.add(skuAttribute);
-//                });
                 pmsSkusku.setProductId(pmsProduct.getId());
                 if (isAdmin) {
                     pmsSkusku.setVerifyStatus(AGREE);
                 } else {
                     pmsSkusku.setVerifyStatus(REFUSE);
                 }
+                pmsProductSkuMapper.insertSku(pmsSkusku);
+                sku.getSkuAttributesList().forEach(skuAttribute -> {
+                    skuAttribute.setSkuId(pmsSkusku.getId());
+                    skuAttributes.add(skuAttribute);
+                });
+                pmsProductSkuMapper.batchSkuAttribute(skuAttributes);
                 skuList.add(pmsSkusku);
             });
         }
-        pmsProductSkuMapper.batchSku(skuList);
         if (isAdmin) {
             pmsProduct.setVerifyStatus(AGREE);
         } else {
