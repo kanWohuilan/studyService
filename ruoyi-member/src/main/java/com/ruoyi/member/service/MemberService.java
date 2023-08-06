@@ -1,8 +1,6 @@
 package com.ruoyi.member.service;
 
-import com.ruoyi.member.domain.UmsMember;
-
-import java.util.List;
+import com.ruoyi.common.core.domain.entity.Member;
 
 /**
  * @Author FGQ
@@ -13,5 +11,15 @@ import java.util.List;
  * @Version 1.0
  */
 public interface MemberService {
-    List<UmsMember> selectMemberList(UmsMember umsMember);
+//    List<Member> selectMemberList(Member umsMember);
+
+    /**
+     * 通过用户名查询用户
+     *
+     * @param userName 用户名
+     * @return 用户对象信息
+     */
+    public Member selectUserByUserName(String userName);
+    public String checkUserNameUnique(Member user);
+    public  Boolean registerUser (Member member);
 }

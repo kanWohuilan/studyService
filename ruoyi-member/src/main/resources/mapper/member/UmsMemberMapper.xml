@@ -4,8 +4,42 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.member.mapper.UmsMemberMapper">
 
-    <select id="selectMemberList" parameterType="UmsMember" resultType="UmsMember">
+    <select id="selectMemberList" parameterType="Member" resultType="Member">
         select id from ums_member
     </select>
-
+    <select id="selectUserByUserName" parameterType="String" resultType="Member">
+        select id as userId, username as userName,nickname as nickName,phone  from ums_member
+        where username = #{userName}
+    </select>
+    <insert id="insertUser" parameterType="Member" useGeneratedKeys="true" keyProperty="id">
+        insert into ums_member(
+        <if test="userId != null and userId != 0">id,</if>
+        <if test="deptId != null and deptId != 0">dept_id,</if>
+        <if test="userName != null and userName != ''">username,</if>
+        <if test="nickName != null and nickName != ''">nickname,</if>
+        <if test="email != null and email != ''">email,</if>
+        <if test="avatar != null and avatar != ''">avatar,</if>
+        <if test="phonenumber != null and phonenumber != ''">phone,</if>
+        <if test="sex != null and sex != ''">sex,</if>
+        <if test="password != null and password != ''">password,</if>
+        <if test="status != null and status != ''">status,</if>
+        <if test="createBy != null and createBy != ''">create_by,</if>
+        <if test="remark != null and remark != ''">remark,</if>
+        create_time
+        )values(
+        <if test="userId != null and userId != ''">#{userId},</if>
+        <if test="deptId != null and deptId != ''">#{deptId},</if>
+        <if test="userName != null and userName != ''">#{userName},</if>
+        <if test="nickName != null and nickName != ''">#{nickName},</if>
+        <if test="email != null and email != ''">#{email},</if>
+        <if test="avatar != null and avatar != ''">#{avatar},</if>
+        <if test="phonenumber != null and phonenumber != ''">#{phonenumber},</if>
+        <if test="sex != null and sex != ''">#{sex},</if>
+        <if test="password != null and password != ''">#{password},</if>
+        <if test="status != null and status != ''">#{status},</if>
+        <if test="createBy != null and createBy != ''">#{createBy},</if>
+        <if test="remark != null and remark != ''">#{remark},</if>
+        sysdate()
+        )
+    </insert>
 </mapper>

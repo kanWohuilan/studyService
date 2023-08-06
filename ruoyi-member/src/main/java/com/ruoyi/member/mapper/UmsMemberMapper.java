@@ -1,6 +1,6 @@
 package com.ruoyi.member.mapper;
 
-import com.ruoyi.member.domain.UmsMember;
+import com.ruoyi.common.core.domain.entity.Member;
 
 import java.util.List;
 
@@ -14,5 +14,9 @@ import java.util.List;
  */
 
 public interface UmsMemberMapper {
-    public List<UmsMember> selectMemberList(UmsMember member);
+//    public List<Member> selectMemberList(Member member);
+    public Member selectUserByUserName(String username);
+    public int insertUser(Member member);
+
+    public Member checkUserNameUnique(String name);
 }

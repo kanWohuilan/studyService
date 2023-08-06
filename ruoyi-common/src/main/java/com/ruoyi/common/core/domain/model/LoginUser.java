@@ -2,6 +2,8 @@ package com.ruoyi.common.core.domain.model;
 
 import java.util.Collection;
 import java.util.Set;
+
+import com.ruoyi.common.core.domain.entity.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.alibaba.fastjson2.annotation.JSONField;
@@ -70,6 +72,31 @@ public class LoginUser implements UserDetails
      * 用户信息
      */
     private SysUser user;
+    private Member member;
+
+    public LoginUser()
+    {
+    }
+
+    public LoginUser(SysUser user, Set<String> permissions)
+    {
+        this.user = user;
+        this.permissions = permissions;
+    }
+
+    public LoginUser(Long userId,Member user)
+    {
+        this.userId = userId;
+        this.member = user;
+    }
+
+    public LoginUser(Long userId, Long deptId, SysUser user, Set<String> permissions)
+    {
+        this.userId = userId;
+        this.deptId = deptId;
+        this.user = user;
+        this.permissions = permissions;
+    }
 
     public Long getUserId()
     {
@@ -101,35 +128,18 @@ public class LoginUser implements UserDetails
         this.token = token;
     }
 
-    public LoginUser()
-    {
-    }
-
-    public LoginUser(SysUser user, Set<String> permissions)
-    {
-        this.user = user;
-        this.permissions = permissions;
-    }
-
-    public LoginUser(Long userId, Long deptId, SysUser user, Set<String> permissions)
-    {
-        this.userId = userId;
-        this.deptId = deptId;
-        this.user = user;
-        this.permissions = permissions;
-    }
-
     @JSONField(serialize = false)
     @Override
     public String getPassword()
     {
-        return user.getPassword();
+        return
+                user != null ?    user.getPassword(): member.getPassword();
     }
 
     @Override
     public String getUsername()
     {
-        return user.getUserName();
+        return   user != null ?    user.getUserName(): member.getUserName();
     }
 
     /**
@@ -256,6 +266,16 @@ public class LoginUser implements UserDetails
     public void setUser(SysUser user)
     {
         this.user = user;
+    }
+
+    public Member getMember()
+    {
+        return member;
+    }
+
+    public void setMember(Member user)
+    {
+        this.member = user;
     }
 
     @Override
